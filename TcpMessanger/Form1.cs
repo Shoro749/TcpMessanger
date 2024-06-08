@@ -21,6 +21,7 @@ namespace TcpMessanger
             {
                 case "message":
                     message = Encoding.UTF8.GetString(request.Data);
+                    messageTb.Text = "";
                     break;
 
                 case "name":

@@ -83,6 +83,15 @@ public class TcpServerManager
                     if (request.Path == "login")
                     {
                         string username = Encoding.UTF8.GetString(request.Data);
+                        foreach (var person in _clients)
+                        {
+                            if (person.Key == username)
+                            {
+                                request.Path = "name";
+                                Received?.Invoke(request);
+                                return;
+                            }
+                        }
                         _clients.Add(username, client);
                     }
 

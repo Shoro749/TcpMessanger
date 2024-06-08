@@ -6,7 +6,6 @@ namespace TcpMessangerServer
     public partial class Form1 : Form
     {
         private TcpServerManager _serverManager;
-        private List<String> _users = new List<String>();
         public Form1()
         {
             InitializeComponent();
@@ -22,19 +21,6 @@ namespace TcpMessangerServer
             {
                 case "login":
                     string username = Encoding.UTF8.GetString(request.Nickname);
-
-                    foreach (String user in _users)
-                    {
-                        if (user == username)
-                        {
-                            sendReq.Path = "name";
-                            auditMessage = $"User {username} has taken!";
-                            sendReq.Data = Encoding.UTF8.GetBytes(auditMessage);
-                            _serverManager.Send(sendReq);
-                            return;
-                        }
-                    }
-
                     sendReq.Path = "message";
                     auditMessage = $"User {username} has joined";
                     sendReq.Data = Encoding.UTF8.GetBytes(auditMessage);
